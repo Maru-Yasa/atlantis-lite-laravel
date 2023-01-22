@@ -224,18 +224,8 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
+										<a href="{{ route('profile') }}">
 											<span class="link-collapse">My Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
 										</a>
 									</li>
 								</ul>
@@ -247,6 +237,13 @@
 							<a href="{{ route('home') }}" class="">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
+							</a>
+						</li>
+
+						<li class="nav-item @if(Route::is('profile')) active @endif">
+							<a href="{{ route('profile') }}" class="">
+								<i class="fas fa-user"></i>
+								<p>Profile</p>
 							</a>
 						</li>
 
@@ -264,21 +261,18 @@
 							</a>
 						</li>
 
-						{{-- header --}}
-						<li class="nav-section">
+						{{-- <li class="nav-section">
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
 							</span>
 							<h4 class="text-section">Example</h4>
 						</li>
-						{{-- menu biasa --}}
 						<li class="nav-item @if(Route::is('asd')) active @endif">
 							<a href="#sidebarLayouts">
 								<i class="fas fa-th-list"></i>
 								<p>Sidebar Layouts</p>
 							</a>
 						</li>
-						{{-- with badge --}}
 						<li class="nav-item @if(Route::is('asd')) active @endif">
 							<a href="widgets.html">
 								<i class="fas fa-desktop"></i>
@@ -286,7 +280,6 @@
 								<span class="badge badge-success">4</span>
 							</a>
 						</li>
-						{{-- menu collapse children --}}
 						<li class="nav-item  @if(Route::is('asd')) active @endif">
 							<a data-toggle="collapse" href="#forms">
 								<i class="fas fa-pen-square"></i>
@@ -353,7 +346,7 @@
 									</li>
 								</ul>
 							</div>
-						</li>
+						</li> --}}
 					</ul>
 				</div>
 			</div>
