@@ -4,14 +4,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="/assets/img/icon.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
-	<script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+	<script src="/assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../assets/css/fonts.min.css']},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['/assets/css/fonts.min.css']},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -84,7 +84,7 @@
 											</a>
 											<a href="#">
 												<div class="notif-img"> 
-													<img src="../assets/img/profile2.jpg" alt="Img Profile">
+													<img src="/assets/img/profile2.jpg" alt="Img Profile">
 												</div>
 												<div class="notif-content">
 													<span class="block">
@@ -170,29 +170,28 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+									<img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<div class="dropdown-user-scroll scrollbar-outer">
 									<li>
 										<div class="user-box">
-											<div class="avatar-lg"><img src="../assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
+											<div class="avatar-lg"><img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
-												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+												<h4>{{ Auth::user()->name }}</h4>
+												<p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ route('profile') }}" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">My Profile</a>
-										<a class="dropdown-item" href="#">My Balance</a>
-										<a class="dropdown-item" href="#">Inbox</a>
+										<a class="dropdown-item" href="{{ route('profile') }}">Account Setting</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Account Setting</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Logout</a>
+										<form action="{{ route('logout') }}" method="post">
+											@csrf
+											<button type="submit" class="dropdown-item" href="">Logout</button>											
+										</form>
 									</li>
 								</div>
 							</ul>
@@ -210,12 +209,12 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
+									{{ Auth::user()->name }}
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -243,44 +242,44 @@
 							</div>
 						</div>
 					</div>
-					<ul class="nav nav-primary">
-						<li class="nav-item active">
-							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+					<ul class="nav nav-primary ">
+						<li class="nav-item @if(Route::is('home')) active @endif">
+							<a href="{{ route('home') }}" class="">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
-								<span class="caret"></span>
 							</a>
-							<div class="collapse" id="dashboard">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="../demo1/index.html">
-											<span class="sub-item">Dashboard 1</span>
-										</a>
-									</li>
-									<li>
-										<a href="../demo2/index.html">
-											<span class="sub-item">Dashboard 2</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</li>
+
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Master Data</h4>
+						</li>
+
+						<li class="nav-item @if(Route::is('users.index')) active @endif">
+							<a href="{{ route('users.index') }}">
+								<i class="fas fa-users"></i>
+								<p>Users</p>
+							</a>
+						</li>
+
 						{{-- header --}}
 						<li class="nav-section">
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
 							</span>
-							<h4 class="text-section">Components</h4>
+							<h4 class="text-section">Example</h4>
 						</li>
 						{{-- menu biasa --}}
-						<li class="nav-item">
+						<li class="nav-item @if(Route::is('asd')) active @endif">
 							<a href="#sidebarLayouts">
 								<i class="fas fa-th-list"></i>
 								<p>Sidebar Layouts</p>
 							</a>
 						</li>
 						{{-- with badge --}}
-						<li class="nav-item">
+						<li class="nav-item @if(Route::is('asd')) active @endif">
 							<a href="widgets.html">
 								<i class="fas fa-desktop"></i>
 								<p>Widgets</p>
@@ -288,7 +287,7 @@
 							</a>
 						</li>
 						{{-- menu collapse children --}}
-						<li class="nav-item">
+						<li class="nav-item  @if(Route::is('asd')) active @endif">
 							<a data-toggle="collapse" href="#forms">
 								<i class="fas fa-pen-square"></i>
 								<p>Forms</p>
@@ -304,7 +303,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item  @if(Route::is('asd')) active @endif">
 							<a data-toggle="collapse" href="#submenu">
 								<i class="fas fa-bars"></i>
 								<p>Menu Levels</p>
